@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRest", "XRest\XRest.csproj", "{0F49F87B-2276-4950-9C95-FA19483B763F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F49F87B-2276-4950-9C95-FA19483B763F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F49F87B-2276-4950-9C95-FA19483B763F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F49F87B-2276-4950-9C95-FA19483B763F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F49F87B-2276-4950-9C95-FA19483B763F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5072005C-720E-4069-A120-2454A5504F24}
+	EndGlobalSection
+EndGlobal
