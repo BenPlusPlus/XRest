@@ -17,5 +17,9 @@ namespace XRestDemo
             InitializeComponent();
         }
 
+        private void frmDemo_Load(object sender, EventArgs e)
+        {
+            cboMethod.SelectedIndex = 0;
+        }
     }
 }
