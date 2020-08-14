@@ -8,16 +8,20 @@ namespace XRest
 {
     public class RestClient
     {
+        // This static member is used to share a common instance of
+        // HttpClient when no HttpClient is injected in the constructor.
+        private static HttpClient _sharedHttpClient;
+
         private Uri _baseUrl;
         private HttpClient _httpClient;
 
         public RestClient(string BaseUrl)
         {
-            Init(new Uri(BaseUrl), new HttpClient());
+            Init(new Uri(BaseUrl));
         }
         public RestClient(Uri BaseUrl)
         {
-            Init(BaseUrl, new HttpClient());
+            Init(BaseUrl);
         }
 
         // Allow HttpClient to be injected to avoid issues with socket availability
@@ -31,6 +35,14 @@ namespace XRest
             Init(BaseUrl, HttpClient);
         }
 
+        private void Init(Uri BaseUrl)
+        {
+            if (_sharedHttpClient == null)
+            {
+                _sharedHttpClient = new HttpClient();
+            }
+            Init(BaseUrl, _sharedHttpClient);
+        }
         private void Init(Uri BaseUrl, HttpClient HttpClient)
         {
             _baseUrl = BaseUrl;
