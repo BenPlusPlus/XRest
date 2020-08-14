@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRest", "XRest\XRest.csproj", "{0F49F87B-2276-4950-9C95-FA19483B763F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XRestDemo", "XRestDemo\XRestDemo.csproj", "{0E044CC7-94C6-459C-9798-DF7F65FF91AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0F49F87B-2276-4950-9C95-FA19483B763F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F49F87B-2276-4950-9C95-FA19483B763F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F49F87B-2276-4950-9C95-FA19483B763F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E044CC7-94C6-459C-9798-DF7F65FF91AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E044CC7-94C6-459C-9798-DF7F65FF91AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E044CC7-94C6-459C-9798-DF7F65FF91AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E044CC7-94C6-459C-9798-DF7F65FF91AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

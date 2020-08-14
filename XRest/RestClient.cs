@@ -57,17 +57,14 @@ namespace XRest
             }
         }
 
-        public async Task<T> Get<T>(string url)
+        public async Task<T> Get<T>(string UrlPart)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(apiBasicUri);
-                var result = await client.GetAsync(url);
-                result.EnsureSuccessStatusCode();
-                string resultContentString = await result.Content.ReadAsStringAsync();
-                T resultContent = JsonConvert.DeserializeObject<T>(resultContentString);
-                return resultContent;
-            }
+            _httpClient.BaseAddress = _baseUrl;
+            var result = await _httpClient.GetAsync(new Uri(UrlPart)).ConfigureAwait(false);
+            result.EnsureSuccessStatusCode();
+            string resultContentString = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+            T resultContent = JsonConvert.DeserializeObject<T>(resultContentString);
+            return resultContent;
         }
 
         public async Task Delete(string UrlPart)
