@@ -36,6 +36,10 @@
             this.cboMethod = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSend = new System.Windows.Forms.Button();
+            this.txtResult = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtInput = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtBaseUrl
@@ -60,7 +64,7 @@
             this.txtSubUri.Location = new System.Drawing.Point(12, 109);
             this.txtSubUri.Name = "txtSubUri";
             this.txtSubUri.PlaceholderText = "methodname/{id}";
-            this.txtSubUri.Size = new System.Drawing.Size(433, 23);
+            this.txtSubUri.Size = new System.Drawing.Size(189, 23);
             this.txtSubUri.TabIndex = 0;
             // 
             // label2
@@ -92,7 +96,7 @@
             "POST",
             "PUT",
             "DELETE"});
-            this.cboMethod.Location = new System.Drawing.Point(482, 109);
+            this.cboMethod.Location = new System.Drawing.Point(207, 109);
             this.cboMethod.Name = "cboMethod";
             this.cboMethod.Size = new System.Drawing.Size(154, 23);
             this.cboMethod.TabIndex = 3;
@@ -100,7 +104,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(482, 91);
+            this.label4.Location = new System.Drawing.Point(207, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 15);
             this.label4.TabIndex = 1;
@@ -108,18 +112,60 @@
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(482, 167);
+            this.btnSend.Location = new System.Drawing.Point(232, 414);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(154, 38);
             this.btnSend.TabIndex = 4;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            // 
+            // txtResult
+            // 
+            this.txtResult.Location = new System.Drawing.Point(419, 109);
+            this.txtResult.Multiline = true;
+            this.txtResult.Name = "txtResult";
+            this.txtResult.ReadOnly = true;
+            this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtResult.Size = new System.Drawing.Size(369, 343);
+            this.txtResult.TabIndex = 6;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(419, 91);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 15);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Result:";
+            // 
+            // txtInput
+            // 
+            this.txtInput.Location = new System.Drawing.Point(10, 165);
+            this.txtInput.Multiline = true;
+            this.txtInput.Name = "txtInput";
+            this.txtInput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtInput.Size = new System.Drawing.Size(376, 243);
+            this.txtInput.TabIndex = 5;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(10, 147);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 15);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Input:";
             // 
             // frmDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 470);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtInput);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtResult);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cboMethod);
@@ -146,6 +192,10 @@
         private System.Windows.Forms.ComboBox cboMethod;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.TextBox txtResult;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtInput;
+        private System.Windows.Forms.Label label6;
     }
 }
 
