@@ -70,47 +70,69 @@ namespace XRest
             return resultContent;
         }
 
-        public async Task Post(string RelativePath, string Value)
+        public async Task<string> Post(string RelativePath, string Value)
         {
             using (var content = new StringContent(Value, Encoding.UTF8, "application/json"))
             {
                 var result = await _httpClient.PostAsync(new Uri(_baseUrl, RelativePath), content).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
+                string resultContentString = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                return resultContentString;
             }
         }
 
-        public async Task Post<T>(string RelativePath, T Value)
+        public async Task<T> Post<T>(string RelativePath, T Value)
         {
             using (var content = new StringContent(JsonConvert.SerializeObject(Value), Encoding.UTF8, "application/json"))
             {
                 var result = await _httpClient.PostAsync(new Uri(_baseUrl, RelativePath), content).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
+                string resultContentString = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                T resultContent = JsonConvert.DeserializeObject<T>(resultContentString);
+                return resultContent;
             }
         }
 
-        public async Task Put(string RelativePath, string Value)
+        public async Task<string> Put(string RelativePath, string Value)
         {
             using (var content = new StringContent(Value, Encoding.UTF8, "application/json"))
             {
                 var result = await _httpClient.PutAsync(new Uri(_baseUrl, RelativePath), content).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
+                string resultContentString = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                return resultContentString;
             }
         }
 
-        public async Task Put<T>(string RelativePath, T Value)
+        public async Task<T> Put<T>(string RelativePath, T Value)
         {
             using (var content = new StringContent(JsonConvert.SerializeObject(Value), Encoding.UTF8, "application/json"))
             {
                 var result = await _httpClient.PutAsync(new Uri(_baseUrl, RelativePath), content).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
+                string resultContentString = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                T resultContent = JsonConvert.DeserializeObject<T>(resultContentString);
+                return resultContent;
             }
         }
 
-        public async Task Delete(string RelativePath)
+        public async Task<string> Delete(string RelativePath)
         {
             var result = await _httpClient.DeleteAsync(new Uri(_baseUrl, RelativePath)).ConfigureAwait(false);
             result.EnsureSuccessStatusCode();
+            string resultContentString = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return resultContentString;
         }
+
+        public async Task<T> Delete<T>(string RelativePath)
+        {
+            var result = await _httpClient.DeleteAsync(new Uri(_baseUrl, RelativePath)).ConfigureAwait(false);
+            result.EnsureSuccessStatusCode();
+            string resultContentString = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+            T resultContent = JsonConvert.DeserializeObject<T>(resultContentString);
+            return resultContent;
+        }
+
     }
 }
 
