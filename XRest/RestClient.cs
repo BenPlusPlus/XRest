@@ -45,14 +45,17 @@ namespace XRest
         }
         private void Init(Uri BaseUrl, HttpClient HttpClient)
         {
+            if (BaseUrl.ToString().EndsWith('/') == false)
+            {
+                throw new Exception("BaseUrl parameter must end with /");
+            }
             _baseUrl = BaseUrl;
             _httpClient = HttpClient;
         }
 
         public async Task<string> Get(string RelativePath)
         {
-            _httpClient.BaseAddress = _baseUrl;
-            var result = await _httpClient.GetAsync(new Uri(RelativePath, UriKind.Relative)).ConfigureAwait(false);
+            var result = await _httpClient.GetAsync(new Uri(_baseUrl, RelativePath)).ConfigureAwait(false);
             result.EnsureSuccessStatusCode();
             string resultContentString = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
             return resultContentString;
@@ -60,8 +63,7 @@ namespace XRest
 
         public async Task<T> Get<T>(string RelativePath)
         {
-            _httpClient.BaseAddress = _baseUrl;
-            var result = await _httpClient.GetAsync(new Uri(RelativePath, UriKind.Relative)).ConfigureAwait(false);
+            var result = await _httpClient.GetAsync(new Uri(_baseUrl, RelativePath)).ConfigureAwait(false);
             result.EnsureSuccessStatusCode();
             string resultContentString = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
             T resultContent = JsonConvert.DeserializeObject<T>(resultContentString);
@@ -70,48 +72,43 @@ namespace XRest
 
         public async Task Post(string RelativePath, string Value)
         {
-            _httpClient.BaseAddress = _baseUrl;
             using (var content = new StringContent(Value, Encoding.UTF8, "application/json"))
             {
-                var result = await _httpClient.PostAsync(new Uri(RelativePath, UriKind.Relative), content).ConfigureAwait(false);
+                var result = await _httpClient.PostAsync(new Uri(_baseUrl, RelativePath), content).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
             }
         }
 
         public async Task Post<T>(string RelativePath, T Value)
         {
-            _httpClient.BaseAddress = _baseUrl;
             using (var content = new StringContent(JsonConvert.SerializeObject(Value), Encoding.UTF8, "application/json"))
             {
-                var result = await _httpClient.PostAsync(new Uri(RelativePath, UriKind.Relative), content).ConfigureAwait(false);
+                var result = await _httpClient.PostAsync(new Uri(_baseUrl, RelativePath), content).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
             }
         }
 
         public async Task Put(string RelativePath, string Value)
         {
-            _httpClient.BaseAddress = _baseUrl;
             using (var content = new StringContent(Value, Encoding.UTF8, "application/json"))
             {
-                var result = await _httpClient.PutAsync(new Uri(RelativePath, UriKind.Relative), content).ConfigureAwait(false);
+                var result = await _httpClient.PutAsync(new Uri(_baseUrl, RelativePath), content).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
             }
         }
 
         public async Task Put<T>(string RelativePath, T Value)
         {
-            _httpClient.BaseAddress = _baseUrl;
             using (var content = new StringContent(JsonConvert.SerializeObject(Value), Encoding.UTF8, "application/json"))
             {
-                var result = await _httpClient.PutAsync(new Uri(RelativePath, UriKind.Relative), content).ConfigureAwait(false);
+                var result = await _httpClient.PutAsync(new Uri(_baseUrl, RelativePath), content).ConfigureAwait(false);
                 result.EnsureSuccessStatusCode();
             }
         }
 
         public async Task Delete(string RelativePath)
         {
-            _httpClient.BaseAddress = _baseUrl;
-            var result = await _httpClient.DeleteAsync(new Uri(RelativePath, UriKind.Relative)).ConfigureAwait(false);
+            var result = await _httpClient.DeleteAsync(new Uri(_baseUrl, RelativePath)).ConfigureAwait(false);
             result.EnsureSuccessStatusCode();
         }
     }
