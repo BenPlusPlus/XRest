@@ -5,11 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using XRest;
+using XRest.Authentication;
 
 namespace XRestDemo
 {
@@ -55,5 +57,29 @@ namespace XRestDemo
                     break;
             }
         }
+
+        private void btnTokenTest_Click(object sender, EventArgs e)
+        {
+            OAuth2Options opts = new OAuth2Options
+            {
+                TokenUrl = new Uri(txtTokenUrl.Text),
+                ClientId = txtClientId.Text,
+                ClientSecret = txtClientSecret.Text,
+                Resource = txtClientResource.Text
+            };
+            DefaultOAuth2Authenticator auth = new DefaultOAuth2Authenticator(opts);
+
+            try
+            {
+                auth.RefreshToken().Wait();
+                txtResult.Text = auth.Token.AccessToken;
+            }
+            catch (Exception exc)
+            {
+                txtResult.Text = $"ERROR: {exc.Message}";
+            }
+        }
+
     }
 }
+

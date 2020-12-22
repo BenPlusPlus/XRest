@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
+using XRest.Authentication;
 
 namespace XRest
 {
@@ -14,6 +16,7 @@ namespace XRest
 
         private Uri _baseUrl;
         private HttpClient _httpClient;
+        private IOAuth2Authenticator _auth;
 
         public RestClient(string BaseUrl)
         {
@@ -28,22 +31,36 @@ namespace XRest
         // (see: https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/)
         public RestClient(string BaseUrl, HttpClient HttpClient)
         {
-            Init(new Uri(BaseUrl), HttpClient);
+            Init(new Uri(BaseUrl), null, HttpClient);
         }
         public RestClient(Uri BaseUrl, HttpClient HttpClient)
         {
-            Init(BaseUrl, HttpClient);
+            Init(BaseUrl, null, HttpClient);
+        }
+
+        public RestClient(Uri BaseUrl, IOAuth2Authenticator Authenticator)
+        {
+            Init(BaseUrl, Authenticator);
+        }
+
+        public RestClient(Uri BaseUrl, IOAuth2Authenticator Authenticator, HttpClient HttpClient)
+        {
+            Init(BaseUrl, Authenticator, HttpClient);
         }
 
         private void Init(Uri BaseUrl)
+        {
+            Init(BaseUrl, null);
+        }
+        private void Init(Uri BaseUrl, IOAuth2Authenticator Authenticator)
         {
             if (_sharedHttpClient == null)
             {
                 _sharedHttpClient = new HttpClient();
             }
-            Init(BaseUrl, _sharedHttpClient);
+            Init(BaseUrl, Authenticator, _sharedHttpClient);
         }
-        private void Init(Uri BaseUrl, HttpClient HttpClient)
+        private void Init(Uri BaseUrl, IOAuth2Authenticator Authenticator, HttpClient HttpClient)
         {
             if (BaseUrl.ToString().EndsWith('/') == false)
             {
@@ -51,6 +68,7 @@ namespace XRest
             }
             _baseUrl = BaseUrl;
             _httpClient = HttpClient;
+            _auth = Authenticator;
         }
 
         public async Task<string> Get(string RelativePath)
